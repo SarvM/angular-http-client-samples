@@ -11,19 +11,19 @@ import { Config } from './config';
 export class ConfigComponent implements OnInit {
 
   config: Config;
+  error: any;
 
   constructor(public configService: ConfigService) { 
-    //this.config = undefined;
-
-
+    this.config = undefined;
+    this.error = undefined;
   }
 
 
   ngOnInit() {
         //this.showSimple();
-    console.log(this.showSimpleAssignObject());
+    //console.log(this.showSimpleAssignObject());
 
-    console.log(this.config);
+    //console.log(this.config);
   }
 
   showSimple() {
@@ -33,12 +33,21 @@ export class ConfigComponent implements OnInit {
 
   showSimpleAssignObject() {
     this.configService.getConfigSimple()
-      .subscribe((data: Config) => 
+      .subscribe((data: Config) => {
         this.config = {
           employeeUrl: data['employeeUrl'],
           mockFile: data['mockFile']
         }
-      )
+        //console.log(this.config)
+      });
+  }
+
+    showSimpleTypedObject() {
+    this.configService.getConfigSimple()
+      .subscribe((data: Config) => {
+        this.config = { ...data },
+        error => this.error = error
+      });
   }
 
 }

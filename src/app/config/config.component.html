@@ -1,0 +1,7 @@
+<h2>Configuration File Details</h2>
+<button (click)="showSimpleAssignObject()">Fetch Config Properties</button>
+<button (click)="showSimpleTypedObject()">Fetch Config Properties - Typed</button>
+<span *ngIf="config">
+  <p>Employee URL: {{config.employeeUrl}}</p>
+  <p>Mock Data URL: {{config.mockFile}}</p>
+</span>
