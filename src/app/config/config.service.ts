@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Config } from './config';
 
 
 @Injectable()
@@ -11,6 +12,6 @@ export class ConfigService {
   constructor(private http: HttpClient) {}
 
   getConfigSimple() {
-    return this.http.get(this.configUrl);
+    return this.http.get<Config>(this.configUrl);
   }
 }

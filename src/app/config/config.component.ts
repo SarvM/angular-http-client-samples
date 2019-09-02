@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from './config.service';
+import { Config } from './config';
 
 @Component({
   selector: 'app-config',
@@ -9,8 +10,20 @@ import { ConfigService } from './config.service';
 })
 export class ConfigComponent implements OnInit {
 
+  config: Config;
+
   constructor(public configService: ConfigService) { 
-    this.showSimple();
+    //this.config = undefined;
+
+
+  }
+
+
+  ngOnInit() {
+        //this.showSimple();
+    console.log(this.showSimpleAssignObject());
+
+    console.log(this.config);
   }
 
   showSimple() {
@@ -18,7 +31,14 @@ export class ConfigComponent implements OnInit {
       .subscribe(data => console.log(data));
   }
 
-  ngOnInit() {
+  showSimpleAssignObject() {
+    this.configService.getConfigSimple()
+      .subscribe((data: Config) => 
+        this.config = {
+          employeeUrl: data['employeeUrl'],
+          mockFile: data['mockFile']
+        }
+      )
   }
 
 }
